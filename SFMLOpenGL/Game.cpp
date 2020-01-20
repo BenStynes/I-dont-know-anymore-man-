@@ -2,7 +2,7 @@
 
 static bool flip;
 
-Game::Game() : window(VideoMode(800, 600), "OpenGL Cube VBO")
+Game::Game() : window(sf::VideoMode(800, 600), "OpenGL Cube VBO")
 {
 }
 
@@ -13,15 +13,15 @@ void Game::run()
 
 	initialize();
 
-	Event event;
+	sf::Event event;
 
 	while (isRunning) {
 
-		cout << "Game running..." << endl;
+	
 
 		while (window.pollEvent(event))
 		{
-			if (event.type == Event::Closed)
+			if (event.type == sf::Event::Closed)
 			{
 				isRunning = false;
 			}
@@ -152,12 +152,12 @@ void Game::update()
 	vertex[0].coordinate[1] += -0.0001f;
 	vertex[0].coordinate[2] += -0.0001f;
 
-	cout << "Update up" << endl;
+	
 }
 
 void Game::render()
 {
-	cout << "Drawing" << endl;
+	
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -190,7 +190,7 @@ void Game::render()
 
 void Game::unload()
 {
-	cout << "Cleaning up" << endl;
+	
 
 	glDeleteBuffers(1, vbo);
 }
