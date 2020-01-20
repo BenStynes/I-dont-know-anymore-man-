@@ -96,7 +96,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;glew32s.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-network-d.lib;OpenGL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glew32s.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-network-d.lib;OpenGL32.lib;GlU32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy $(SFML_SDK)\bin $(TargetDir) /C /Y
@@ -154,11 +154,15 @@ xcopy $(GLEW_SDK)\bin\Release\Win32 $(TargetDir) /C /Y</Command>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="Vector2f.h" />
     <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Matrix3.cpp" />
+    <ClCompile Include="Vector2f.cpp" />
+    <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

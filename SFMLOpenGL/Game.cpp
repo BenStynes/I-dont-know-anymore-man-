@@ -39,7 +39,7 @@ typedef struct
 } Vertex;
 
 Vertex vertex[6];
-GLubyte triangles[6];
+GLubyte triangles[36];
 
 /* Variable to hold the VBO identifier */
 GLuint vbo[1];
@@ -50,9 +50,11 @@ void Game::initialize()
 	isRunning = true;
 
 	glewInit();
-
+	glMatrixMode(GL_PROJECTION);
 	/* Vertices counter-clockwise winding */
-
+	gluPerspective(45.0, window.getSize().x / window.getSize().y, 1.0, 500.0);
+	glMatrixMode(GL_MODELVIEW);
+	glTranslatef(0, 0, -8);
 	vertex[0].coordinate[0] = -0.5f;
 	vertex[0].coordinate[1] = -0.5f;
 	vertex[0].coordinate[2] = 0.0f;
@@ -65,17 +67,17 @@ void Game::initialize()
 	vertex[2].coordinate[1] = 0.5f;
 	vertex[2].coordinate[2] = 0.0f;
 
-	//vertex[3].coordinate[0] = 0.5f; 
-	//vertex[3].coordinate[1] = 0.5f;  
-	//vertex[3].coordinate[2] = 0.0f;
+	vertex[3].coordinate[0] = 0.5f; 
+	vertex[3].coordinate[1] = 0.5f;  
+	vertex[3].coordinate[2] = 0.0f;
 
-	//vertex[4].coordinate[0] = 0.5f; 
-	//vertex[4].coordinate[1] = -0.5f;  
-	//vertex[4].coordinate[2] = 0.0f;
+	vertex[4].coordinate[0] = 0.5f; 
+	vertex[4].coordinate[1] = -0.5f;  
+	vertex[4].coordinate[2] = 0.0f;
 
-	//vertex[5].coordinate[0] = -0.5f; 
-	//vertex[5].coordinate[1] = -0.5f;  
-	//vertex[5].coordinate[2] = 0.0f;
+	vertex[5].coordinate[0] = -0.5f; 
+	vertex[5].coordinate[1] = -0.5f;  
+	vertex[5].coordinate[2] = 0.0f;
 
 	vertex[0].color[0] = 0.1f;
 	vertex[0].color[1] = 1.0f;
@@ -103,7 +105,18 @@ void Game::initialize()
 
 
 	triangles[0] = 0;   triangles[1] = 1;   triangles[2] = 2;
-	triangles[3] = 3;   triangles[4] = 4;   triangles[5] = 5;
+	triangles[3] = 2;   triangles[4] = 3;   triangles[5] = 0;
+	triangles[6] = 4;   triangles[7] = 7;   triangles[8] = 6;
+	triangles[9] = 6;   triangles[10] = 5;   triangles[11] = 4;
+	triangles[12] = 3;   triangles[13] = 2;   triangles[14] = 6;
+	triangles[15] = 6;   triangles[16] = 7;   triangles[17] = 3;
+	triangles[18] = 4;   triangles[19] = 5;   triangles[20] = 2;
+	triangles[21] = 1;   triangles[22] = 0;   triangles[23] = 4;
+	triangles[24] = 1;   triangles[25] = 5;   triangles[26] = 6;
+	triangles[27] = 6;   triangles[28] = 2;   triangles[29] = 1;
+	triangles[30] = 0;   triangles[31] = 3;   triangles[32] = 7;
+	triangles[33] = 7;   triangles[34] = 4;   triangles[35] = 0;
+	
 
 	/* Create a new VBO using VBO id */
 	glGenBuffers(1, vbo);
@@ -148,9 +161,9 @@ void Game::update()
 	}
 
 	//Change vertex data
-	vertex[0].coordinate[0] += -0.0001f;
+	/*vertex[0].coordinate[0] += -0.0001f;
 	vertex[0].coordinate[1] += -0.0001f;
-	vertex[0].coordinate[2] += -0.0001f;
+	vertex[0].coordinate[2] += -0.0001f;*/
 
 	
 }
@@ -179,7 +192,7 @@ void Game::render()
 	/*	Draw Triangle from VBO	(set where to start from as VBO can contain 
 		model compoents that are and are not to be drawn )	*/
 	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), (char*)NULL + 0);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, (char*)NULL + 0);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, (char*)NULL + 0);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
